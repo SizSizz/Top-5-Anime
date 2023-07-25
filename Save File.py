@@ -23,5 +23,5 @@ class Person():
     def __init__(self, name, ps1, ps2, ps3, ps4, ps5) -> None:
         
 
-the_anime = Anime('joe')
+the_anime = Anime('tim')
 print(the_anime)
