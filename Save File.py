@@ -25,3 +25,6 @@ class Person():
 
 the_anime = Anime('tim')
 print(the_anime)
+print(the_anime)
+print(the_anime)
+print(the_anime)
