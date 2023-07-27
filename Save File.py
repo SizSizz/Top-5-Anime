@@ -64,17 +64,52 @@ The brothers are rescued by their neighbor Pinako Rockbell and her granddaughter
 As Edward becomes an infamous alchemist and gains the nickname "Fullmetal," the boys' journey embroils them in a growing conspiracy that threatens the fate of the world.'''
 
 synopsis = anime_synopsis()
+isWhileDone = False
 #Anime Shows
-s_Naruto_Shippuuden = Anime('Naruto_Shippuuden', '8.26', synopsis.syn_Naruto_Shippuuden, 'Feb 15, 2007 - Mar 23, 2017', 'Winter', '2007', 'Pierrot', 'Action, Adventure, Fantasy', '500', '#288', 'https://myanimelist.net/anime/1735')
-s_Steins_Gate = Anime('Steins;Gate', '9.07', synopsis.syn_Steins_Gate, 'April 6, 2011 - Sep 14, 2011', 'Spring', '2011', 'White Fox', 'Drama, Sci-Fi, Suspense', '47', '#2', 'https://myanimelist.net/anime/9253/Steins_Gate')
+s_Naruto_Shippuuden = Anime('Naruto Shippuuden', '8.26', synopsis.syn_Naruto_Shippuuden, 'Feb 15, 2007 - Mar 23, 2017', 'Winter', '2007', 'Pierrot', 'Action, Adventure, Fantasy', '500', '#288', 'https://myanimelist.net/anime/1735')
+s_Steins_Gate = Anime('Steins Gate', '9.07', synopsis.syn_Steins_Gate, 'April 6, 2011 - Sep 14, 2011', 'Spring', '2011', 'White Fox', 'Drama, Sci-Fi, Suspense', '47', '#2', 'https://myanimelist.net/anime/9253/Steins_Gate')
 s_Attack_on_Titan = Anime('Attack on Titan', '8.54', synopsis.syn_Attack_on_Titan, 'April 7, 2013 - Sep 29, 2013', 'Spring', '2013', 'Wit Studio', 'Action, Award Winning, Drama, Suspense', '99', '#108', 'https://myanimelist.net/anime/16498/Shingeki_no_Kyojin')
 s_Mob_Pyscho_100 = Anime('Mob Psycho 100', '8.49', synopsis.syn_Mob_Pyscho_100, 'July 11m 2016 - Sep 27, 2016', 'Summer', '2016', 'Bones', 'Action, Comedy, Supernatural', '37', '#134', 'https://myanimelist.net/anime/32182')
 s_Fullmetal_Alchemist_Brotherhood = Anime('Fullmetal Alchemist: Brotherhood', '9.10', synopsis.syn_Fullmetal_Alchemist_Brotherhood, 'April 5, 2009 - July 4, 2010', 'Spring', '2009', 'Bones', 'Action, Drama, Adventure, Fantasy', '64', '#1', 'https://myanimelist.net/anime/5114')
 
+anime_list = [s_Naruto_Shippuuden, s_Steins_Gate, s_Attack_on_Titan, s_Mob_Pyscho_100, s_Fullmetal_Alchemist_Brotherhood]
+
+def view_anime(anime_choice):
+    global isWhileDone
+    for anime_name in anime_list:
+            if anime_choice == (anime_name.name).upper():
+                isWhileDone = True
+                return(anime_name)
+                
+            else:
+                return 'Unable to find the anime. If you need to add this anime then please DM me on Discord: sizsiz'
+
 #People
-the_anime = Person('Siz', s_Naruto_Shippuuden, s_Steins_Gate, s_Attack_on_Titan, s_Mob_Pyscho_100, s_Fullmetal_Alchemist_Brotherhood)
-print(the_anime)
+p_Siz = Person('Siz', s_Naruto_Shippuuden, s_Steins_Gate, s_Attack_on_Titan, s_Mob_Pyscho_100, s_Fullmetal_Alchemist_Brotherhood)
+
+people_list = [p_Siz]
 
 #Program
-print('Welcome to Top 5 Anime!\nThis is where you can post your top 5 animes, view other\'s top 5, view anime show information, and compare them! )
-menu_choice = input('')
+print('Welcome to Top 5 Anime!\nThis is where you can post your top 5 animes, view other\'s top 5, view anime show information, and compare them!\nIf you want to submit your top 5 anime shows (top of list is best while bottom is less) then DM me on Discord: sizsiz')
+menu_text = 'Only submitted anime are in this program.\nHere are your choices:\nView Anime (VA)\ View Users Top 5 Anime (VU)\  Compare Anime (CA)\n'
+
+while(isWhileDone == False):
+    menu_choice = input(menu_text).upper()
+    if(menu_choice == 'VA' or menu_choice == ('VIEW ANIME')):
+        while(isWhileDone == False):
+            anime_choice = input('What anime do you want to view? ').upper()
+            print(view_anime(anime_choice))
+        isWhileDone = False
+
+    elif(menu_choice == 'VU') or menu_choice == ('VIEW USERS TOP 5 ANIME'):
+        for person in people_list: 
+            print(str(person) + '\n= = =  = = =   = = =   = = =   = = =')
+
+    elif(menu_choice == 'CA' or menu_choice == 'COMPARE ANIME'):
+        print('= = =  = = =   = = =   = = =   = = =   = = =  = = =   = = =   = = =   = = =    = = =  = = =   = = =   = = =   = = =')
+        anime_choice = input('What is the first anime? ').upper()
+        anime_choice2 = input('What is the second anime? ').upper()
+
+        print(view_anime(anime_choice))
+        print(view_anime(anime_choice2))
+
