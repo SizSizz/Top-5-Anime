@@ -65,24 +65,71 @@ As Edward becomes an infamous alchemist and gains the nickname "Fullmetal," the 
 
 synopsis = anime_synopsis()
 isWhileDone = False
-#Anime Shows
+#Anime ShowsVA
 s_Naruto_Shippuuden = Anime('Naruto Shippuuden', '8.26', synopsis.syn_Naruto_Shippuuden, 'Feb 15, 2007 - Mar 23, 2017', 'Winter', '2007', 'Pierrot', 'Action, Adventure, Fantasy', '500', '#288', 'https://myanimelist.net/anime/1735')
 s_Steins_Gate = Anime('Steins Gate', '9.07', synopsis.syn_Steins_Gate, 'April 6, 2011 - Sep 14, 2011', 'Spring', '2011', 'White Fox', 'Drama, Sci-Fi, Suspense', '47', '#2', 'https://myanimelist.net/anime/9253/Steins_Gate')
 s_Attack_on_Titan = Anime('Attack on Titan', '8.54', synopsis.syn_Attack_on_Titan, 'April 7, 2013 - Sep 29, 2013', 'Spring', '2013', 'Wit Studio', 'Action, Award Winning, Drama, Suspense', '99', '#108', 'https://myanimelist.net/anime/16498/Shingeki_no_Kyojin')
 s_Mob_Pyscho_100 = Anime('Mob Psycho 100', '8.49', synopsis.syn_Mob_Pyscho_100, 'July 11m 2016 - Sep 27, 2016', 'Summer', '2016', 'Bones', 'Action, Comedy, Supernatural', '37', '#134', 'https://myanimelist.net/anime/32182')
-s_Fullmetal_Alchemist_Brotherhood = Anime('Fullmetal Alchemist: Brotherhood', '9.10', synopsis.syn_Fullmetal_Alchemist_Brotherhood, 'April 5, 2009 - July 4, 2010', 'Spring', '2009', 'Bones', 'Action, Drama, Adventure, Fantasy', '64', '#1', 'https://myanimelist.net/anime/5114')
+s_Fullmetal_Alchemist_Brotherhood = Anime('Fullmetal Alchemist Brotherhood', '9.10', synopsis.syn_Fullmetal_Alchemist_Brotherhood, 'April 5, 2009 - July 4, 2010', 'Spring', '2009', 'Bones', 'Action, Drama, Adventure, Fantasy', '64', '#1', 'https://myanimelist.net/anime/5114')
 
 anime_list = [s_Naruto_Shippuuden, s_Steins_Gate, s_Attack_on_Titan, s_Mob_Pyscho_100, s_Fullmetal_Alchemist_Brotherhood]
 
+def similar_anime(user_anime):
+    similar_list = []
+    anime_3_letters = ''
+    num_count = 3
+    num_count2 = 3
+
+    #Gathers 3 letters or less from the user's anime name 
+    if len(user_anime) > 2:
+        anime_3_letters = (user_anime[0:3]).upper()
+    else:
+        anime_3_letters = (user_anime[0:len(user_anime)]).upper()
+        num_count2 = len(user_anime)
+    
+    #System to check for similar anime
+    num_count_keep = num_count2
+    for t in range(num_count_keep):
+        #will subtract user anime's letters to keep finding similar letters
+        anime_3_letters = (user_anime[0:num_count2]).upper()
+        #goes down the list of animes and searches for each similar compared to user input
+        for i in range(3):
+            for anime_name in anime_list:
+                #will subtract user anime's letters to keep finding similar letters
+                anime3_letters = (anime_name.name[0:num_count]).upper()
+                if anime3_letters == anime_3_letters:
+                    similar_list.append(anime_name)
+            num_count -= 1
+        num_count2 -= 1
+    #Lists out similar anime after using similar system
+    if len(similar_list) > 0:
+        for similar in similar_list:
+            print('We couldn\'t find the anime but here are similar ones:')
+            for anime in similar_list:
+                print(anime.name) 
+            return ''
+    else:
+        return ('Unable to find the anime. If you need to add this anime then please DM me on Discord: sizsiz')
+            
+
 def view_anime(anime_choice):
     global isWhileDone
-    for anime_name in anime_list:
+    isWhileDone2 = False
+    while (isWhileDone2 == False):
+        for anime_name in anime_list:
             if anime_choice == (anime_name.name).upper():
                 isWhileDone = True
-                return(anime_name)
-                
+                print(isWhileDone2)
+                return anime_name
             else:
-                return 'Unable to find the anime. If you need to add this anime then please DM me on Discord: sizsiz'
+                print(similar_anime(anime_choice))
+        anime_choice = (input('What anime do you want to view? ')).upper()
+    
+        
+
+def compare_anime(anime, anime2):
+    print(anime.__repr__() + '= = =  = = =   = = =   = = =   = = =   = = =  = = =   = = =   = = =   = = =    = = =  = = =   = = =   = = =   = = =')
+    return anime2.__repr__()
 
 #People
 p_Siz = Person('Siz', s_Naruto_Shippuuden, s_Steins_Gate, s_Attack_on_Titan, s_Mob_Pyscho_100, s_Fullmetal_Alchemist_Brotherhood)
@@ -108,8 +155,10 @@ while(isWhileDone == False):
     elif(menu_choice == 'CA' or menu_choice == 'COMPARE ANIME'):
         print('= = =  = = =   = = =   = = =   = = =   = = =  = = =   = = =   = = =   = = =    = = =  = = =   = = =   = = =   = = =')
         anime_choice = input('What is the first anime? ').upper()
+        view_A = view_anime(anime_choice)
         anime_choice2 = input('What is the second anime? ').upper()
-
-        print(view_anime(anime_choice))
-        print(view_anime(anime_choice2))
+        view_A2 = view_anime(anime_choice2)
+        compare_A = compare_anime(view_A, view_A2)
+        
+        print(compare_A)
 
